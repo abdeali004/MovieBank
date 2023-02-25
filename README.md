@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/abdeali004/MovieBank/blob/master/ProjectImages/MB3.png?raw=true)
 
-Movie Bank is a movies/series searching and recommendation website. USer can search any movie/series and see what were the IMDB reviews, sentiment score, genre, cast etc.
+Movie Bank is a movies/series searching and recommendation website. User can search any movie/series and see what were the IMDB reviews, sentiment score, genre, cast etc.
 
 
 # Screenshots:
