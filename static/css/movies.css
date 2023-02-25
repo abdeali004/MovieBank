@@ -1,0 +1,32 @@
+body{
+    background-color: #1f1f1f;
+}
+
+.navbar
+{
+    background-color: #1f1f1f !important;
+    padding-bottom: 34px;
+}
+
+h2{
+    color: aliceblue;
+}
+.card
+{
+    background-color: #630000;
+    color : white;
+    
+}
+.card:hover
+{
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #ffbf5f;
+    /* transform: rotate(360deg); */
+}
+
+.card-img
+{
+    height: 220px;
+    width: 140px;
+}

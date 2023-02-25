@@ -1,0 +1,61 @@
+body{
+    background-color: #1f1f1f;
+}
+
+.navbar
+{
+    background-color: #1f1f1f !important;
+    padding-bottom: 34px;
+}
+
+h2{
+    color: aliceblue;
+}
+
+.jumbotron
+{
+    width: 1140px;
+    margin: 5px;
+    border: 3px solid;
+    padding: 10px;
+    box-shadow: 5px 3px #ffda5f;
+}
+
+.review_block
+{
+    margin: 5px;
+    border: 3px solid;
+    padding: 10px;
+    box-shadow: 5px 3px #ffda5f;
+}
+
+.carded
+{
+    margin: 4px;
+    padding: 2px;
+}
+.carded:hover
+{
+    border: 3px solid;
+    padding: 10px;
+    box-shadow: 5px 3px #ffda5f;
+}
+.card-img
+{
+    border-width: 4px;
+    border-style: solid;
+    height: 320px;
+    width: 240px;
+}
+
+
+
+@media screen and (max-device-width: 640px){
+    /* some CSS here */
+.jumbotron
+{
+    width: 320px;
+    margin: 5px;
+}
+} 
+

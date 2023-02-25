@@ -1,0 +1,279 @@
+	<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static '/css/UserChoice.css' %}>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+
+	<script>
+		$(document).ready(
+			function()
+			{
+			$('.gender').click(function()
+			{
+				var txt = "";
+				$('.gender:checked').each(function()
+				{
+					txt += $(this).val()
+				});
+				$("#genderText").val(txt);
+			});
+			});
+		$(document).ready(
+			function()
+			{
+			$('.age').click(function()
+			{
+				var txt = "";
+				$('.age:checked').each(function()
+				{
+					txt += $(this).val()
+				});
+				$("#ageText").val(txt);
+			});
+			});
+		$(document).ready(
+			function()
+			{
+			$('.type').click(function()
+			{
+				var txt = "";
+				$('.type:checked').each(function()
+				{
+					txt += $(this).val() + ","
+				});
+				txt = txt.substring(0,txt.length-1);
+				$("#typeText").val(txt);
+			});
+			});
+		$(document).ready(
+			function()
+			{
+			$('.lang').click(function()
+			{
+				var txt = "";
+				$('.lang:checked').each(function()
+				{
+					txt += $(this).val() + ","
+				});
+				txt = txt.substring(0,txt.length-1);
+				$("#langText").val(txt);
+			});
+			});
+		$(document).ready(
+			function()
+			{
+			$('.genre').click(function()
+			{
+				var txt = "";
+				$('.genre:checked').each(function()
+				{
+					txt += $(this).val() + ","
+				});
+				txt = txt.substring(0,txt.length-1);
+				$("#genreText").val(txt);
+			});
+			});
+	</script>
+</head>
+
+<body>
+    
+    	<div class="section over-hide z-bigger">
+		<input class="checkbox" type="checkbox" name="general" id="general">
+		<label class="for-checkbox" for="general"></label>
+		<div class="background-color"></div>
+		<div class="section over-hide z-bigger">
+			<div class="container pb-5">
+				<div class="row justify-content-center pb-5">
+
+					<!-- gender values-->
+					<form method = "post" action = "/UserData">
+					{% csrf_token %}
+					<div class="col-12 pt-5">
+						<p class="mb-4 pb-2">Gender</p>
+					</div>
+					<div class="col-12 pb-5">
+		
+						<input class="checkbox-tools gender" value = "male" type="radio" name="gender" id="Male" checked>
+						<label class="for-checkbox-tools" for="Male">
+							Male
+						</label><!--
+						--><input class="checkbox-tools gender" value = "female" type="radio" name="gender" id="Female">
+						<label class="for-checkbox-tools" for="Female">							
+							Female
+						</label>
+						<input class="checkbox-tools gender" value = "other" type="radio" name="gender" id="Other">
+						<label class="for-checkbox-tools" for="Other">							
+							Other
+						</label>
+						<input type="hidden" name = "genderValues" id = "genderText">
+						</div>
+
+						<!-- Age values-->
+						
+						<div class="col-12 pt-5">
+						<p class="mb-4 pb-2">Age</p>
+						</div>
+						<div class="col-12 pb-5">
+						<input class="checkbox-tools age" value = "low" type="radio" name="age" id="low" checked>
+						<label class="for-checkbox-tools" for="low">
+							<i class='uil uil-ruler'></i>
+							&lt18
+						</label>
+						<input class="checkbox-tools age" value = "medium" type="radio" name="age" id="medium">
+						<label class="for-checkbox-tools" for="medium">
+							<i class='uil uil-crop-alt'></i>
+							18-45
+						</label>
+						<input class="checkbox-tools age" value = "high" type="radio" name="age" id="high">
+						<label class="for-checkbox-tools" for="high">
+							<i class='uil uil-brush-alt'></i>
+							&gt45
+						</label>
+						<input type="hidden" name = "ageValues" id = "ageText">
+					</div>
+
+					<!-- Type holly bolly etc.-->
+					
+					<div class="col-12 pt-1">
+						<p class="mb-4 pb-2">Select Type:</p>
+					</div>
+					<div class="col-12 pb-5">
+						<input class="checkbox-booking type" value = "hollywood" type="checkbox" name="type" id="Hollywood">
+						<label class="for-checkbox-booking" for="Hollywood">
+							<i class='uil uil-coffee mr-3'></i><span class="text">Hollywood</span>
+						</label><!--
+						--><input class="checkbox-booking type" value = "bollywood" type="checkbox" name="type" id="Bollywood">
+						<label class="for-checkbox-booking" for="Bollywood">							
+							<i class='uil uil-restaurant mr-3'></i><span class="text">Bollywood</span>
+						</label><!--
+						-->
+						<input type="hidden" name = "typeValues" id = "typeText"/>
+						</div>
+						
+						<div class="col-12 pt-1">
+						<p class="mb-4 pb-2">Select Languages:</p>
+						</div>
+						<div class="col-12 pb-5">
+						<input class="checkbox-booking lang" value = "Hindi" type="checkbox" name="booking" id="Hindi">
+						<label class="for-checkbox-booking" for="Hindi">							
+							<i class='uil uil-car-sideview mr-3'></i><span class="text">Hindi</span>
+						</label><!--
+						--><input class="checkbox-booking lang" value = "English" type="checkbox" name="booking" id="English">
+						<label class="for-checkbox-booking" for="English">							
+							<i class='uil uil-flower mr-3'></i><span class="text">English</span>
+						</label><!--
+						--><input class="checkbox-booking lang" value = "French" type="checkbox" name="booking" id="French">
+						<label class="for-checkbox-booking" for="French">							
+							<i class='uil uil-wifi mr-3'></i><span class="text">French</span>
+						</label><!--
+						--><input class="checkbox-booking lang" value = "German" type="checkbox" name="booking" id="German">
+						<label class="for-checkbox-booking" for="German">							
+							<i class='uil uil-parking-square mr-3'></i><span class="text">German</span>
+						</label><!--
+						--><input class="checkbox-booking lang" value = "Russian" type="checkbox" name="booking" id="Russian">
+						<label class="for-checkbox-booking" for="Russian">							
+							<i class='uil uil-tv-retro mr-3'></i><span class="text">Russian</span>
+						</label><!--
+						-->
+						<input type="hidden" name = "langValues" id = "langText"/>
+						</div>
+						
+						<div class="col-12 pt-1">
+						<p class="mb-4 pb-2">Select Your Favorite Genres:</p>
+						</div>
+						<input class="checkbox-booking genre" value = "Action" type="checkbox" name="booking" id="Action">
+						<label class="for-checkbox-booking" for="Action">							
+							<i class='uil uil-books mr-3'></i><span class="text">Action</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Adventure" type="checkbox" name="booking" id="Adventure">
+						<label class="for-checkbox-booking" for="Adventure">							
+							<i class='uil uil-books mr-3'></i><span class="text">Adventure</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Animated" type="checkbox" name="booking" id="Animated">
+						<label class="for-checkbox-booking" for="Animated">							
+							<i class='uil uil-books mr-3'></i><span class="text">Animated</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Biography" type="checkbox" name="booking" id="Biography">
+						<label class="for-checkbox-booking" for="Biography">							
+							<i class='uil uil-books mr-3'></i><span class="text">Biography</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Comedy" type="checkbox" name="booking" id="Comedy">
+						<label class="for-checkbox-booking" for="Comedy">							
+							<i class='uil uil-books mr-3'></i><span class="text">Comedy</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Crime" type="checkbox" name="booking" id="Crime">
+						<label class="for-checkbox-booking" for="Crime">							
+							<i class='uil uil-books mr-3'></i><span class="text">Crime</span>
+						</label>
+							<input class="checkbox-booking genre" value = "Drama" type="checkbox" name="booking" id="Drama">
+						<label class="for-checkbox-booking" for="Drama">							
+							<i class='uil uil-kayak mr-3'></i><span class="text">Drama</span>
+						</label>
+							<input class="checkbox-booking genre" value = "Fantasy" type="checkbox" name="booking" id="Fantasy">
+						<label class="for-checkbox-booking" for="Fantasy">							
+							<i class='uil uil-kayak mr-3'></i><span class="text">Fantasy</span>
+						</label>
+							<input class="checkbox-booking genre" value = "History" type="checkbox" name="booking" id="History">
+						<label class="for-checkbox-booking" for="History">							
+							<i class='uil uil-kayak mr-3'></i><span class="text">History</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Horror" type="checkbox" name="booking" id="Horror">
+						<label class="for-checkbox-booking" for="Horror">							
+							<i class='uil uil-kayak mr-3'></i><span class="text">Horror</span>
+						</label><!--
+						--><input class="checkbox-booking genre" value = "Mystery" type="checkbox" name="booking" id="Mystery">
+						<label class="for-checkbox-booking" for="Mystery">							
+							<i class='uil uil-glass-martini-alt mr-3'></i><span class="text">Mystery</span>
+						</label><!--
+						--><input class="checkbox-booking genre" value = "Musical" type="checkbox" name="booking" id="Musical">
+						<label class="for-checkbox-booking" for="Musical">							
+							<i class='uil uil-dumbbell mr-3'></i><span class="text">Musical</span>
+						</label><!--
+						--><input class="checkbox-booking genre" value = "Romance" type="checkbox" name="booking" id="Romance">
+						<label class="for-checkbox-booking" for="Romance">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">Romance</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Scifi" type="checkbox" name="booking" id="Scifi">
+						<label class="for-checkbox-booking" for="Scifi">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">Scifi</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Sport" type="checkbox" name="booking" id="Sport">
+						<label class="for-checkbox-booking" for="Sport">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">Sport</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Thriller" type="checkbox" name="booking" id="Thriller">
+						<label class="for-checkbox-booking" for="Thriller">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">Thriller</span>
+						</label>
+						<input class="checkbox-booking genre" value = "Western" type="checkbox" name="booking" id="Western">
+						<label class="for-checkbox-booking" for="Western">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">Western</span>
+						</label>
+						<input class="checkbox-booking genre" value = "War" type="checkbox" name="booking" id="War">
+						<label class="for-checkbox-booking" for="War">							
+							<i class='uil uil-sign-alt mr-3'></i><span class="text">War</span>
+						</label>
+						<input type="hidden" name = "genreValues" id = "genreText"/>
+					</div>
+					<button type="submit" class="btn btn-light"><b>Submit</button>
+					</form>
+				</div>
+			</div>	
+		</div>
+	</div>
+		
+	<!-- Link to page
+	================================================== -->
+
+	<a href="#" class="link-to-page" target="_blank"><img src={% static '/img/logo1.png' %} alt=""></a>
+
+
+</body>
+</html>

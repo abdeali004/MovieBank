@@ -1,0 +1,200 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href={% static '/css/searchMovie.css' %}>
+
+  <title>Movies Search Engine!</title>
+</head>
+
+<body>
+<div class = "loader-wrapper">
+      <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+</div>
+
+  <!--navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">MovieBank</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Name</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        Search Page
+      </span>
+    </div>
+  </nav>
+
+
+  <!--search box-->
+  <div class="container searchBox">
+    <div class="col-md-12 mb-4">
+      <form method = "post" action = "search">
+      {% csrf_token %}
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <input autocomplete="off" class="form-control my-0 py-1 amber-border" name = "title" id="search" type="text"
+          placeholder="Search your favourite movie now" aria-label="Search" required>
+        <div class="input-group-append">
+          <button type = "submit" class="input-group-text amber lighten-3" id="basic-text1"><img class="searchButton" src="{%static '/icons/searchico.png' %}"></img></button>
+        </div>
+        </form>
+      </div>
+      <ul class="list-group" id="result"></ul>
+    </div>
+</div> 
+  <!--search ends-->
+  <!--moviecards-->
+<div class = "container">
+    <div class="row">
+    {% if moviesData %}
+    {% for data in moviesData %}
+
+    <div class="col-md-2 card" style= "width: 10rem;">
+      <img src="{{data.imgSrc}}" style= "height:180px;" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{data.title}}  {{data.year}}</h5>
+        <p class="card-text"><strong>Genre : </strong>{{data.genre}}<br><strong>Rating : <img src="{%static '/icons/star.png' %}" style = "height:18px; width:18px;"></img> </strong>{{data.rating}}</p>
+        <a href="movie/{{data.imdbId}}" class="btn btn-secondary" target = "_blank">View more</a>
+      </div>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    </div> 
+    
+    
+    <!--moviecards ends-->
+    <!--movie not found-->
+{% if result1 %}
+    <center>
+<h2 style = "color : white;">Your searched movie is not our database.</h2>
+
+{% if result2 %}
+
+<h6 style = "color : white;"> we found a web result on your title.</h6>
+<br>
+<hr style = "backgroud-color : white;">
+
+<div class="row">
+
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{movieG.imdb_title}}</h5>
+        <p class="card-text">Click below to know more.</p>
+        <a href="movie/{{movieG.imdb_id}}" class="btn btn-primary" target = "_blank">view</a>
+      </div>
+    </div>
+  </div>
+
+</div> 
+{% endif %}
+{% if result2 == False %}
+<br>
+<h6 style = "color : white;"> Sorry!, no result found. Please type correct name.</h6>
+{% endif %}
+    <!--movie not ends-->
+</center>
+{% endif %}
+
+</div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="{% static '/js/searchMovie.js' %}"></script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+    <script>
+       $(window).on("load",function()
+        {
+         setTimeout(removeLoader, 2000);  
+        });
+
+        function removeLoader(){
+    $( ".loader-wrapper" ).fadeOut(500, function() {
+      // fadeOut complete. Remove the loading div
+      $( ".loader-wrapper" ).remove(); //makes page more lightweight 
+  });  
+}
+
+    </script>
+</body>
+
+</html>
+
+<script>
+
+  $(document).ready(function () {
+    $('#search').keyup(function () {
+      var searchField = $('#search').val();
+      var expression = searchField.toLowerCase();
+      if (expression != "" && expression != " "){
+      $.getJSON("{% static '/js/moviesListv1.json' %}", function (data) {
+        console.log(expression)
+        let loop = 1;
+        $('#result').html('');
+        $.each(data, function (key, value) {
+          if (loop != 11)
+          {
+          if (expression.length < 3)
+          {
+            if (value.title.toLowerCase().startsWith(expression)) {
+            $('#result').append('<button id = "' + String(value.id) + '" onclick = \'searchIn("' + String(value.id) + '","' + String(value.title) + '")\' ><li class= "list-group-item">' + value.title + '</li></button>');
+            loop++;
+          }
+          }
+          else 
+          {
+            if (value.title.toLowerCase().includes(expression)) {
+            $('#result').append('<button id = "' + String(value.id) + '" onclick = \'searchIn("' + String(value.id) + '","' + String(value.title) + '")\' ><li class= "list-group-item">' + value.title + '</li></button>');
+            loop++;
+          }
+          }
+          }
+          else{
+            return false;
+          }
+        });
+      });
+      }
+      else
+      {
+        $('#result').append("");
+      }
+    });
+  });
+</script>
